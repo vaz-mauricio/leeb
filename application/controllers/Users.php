@@ -19,6 +19,13 @@
 				$this->load->view('structure/footer');
 			}
 
+			public function login(){
+				
+				$this->load->view('structure/header');
+				$this->load->view('users/login');
+				$this->load->view('structure/footer');
+			}
+
 			public function view() {
 
 				$data['users_item'] = $this->users_model->get_users();

@@ -3,6 +3,7 @@ class Originals_model extends CI_Model {
 
 	public function __construct(){
 		$this->load->database();
+		$this->load->model('users_model');
 	}
 
 	public function get_originals($slug = FALSE){
@@ -13,6 +14,15 @@ class Originals_model extends CI_Model {
 
 		$query = $this->db->get_where('originals', array('slug' => $slug)); //Puxando originais por slug (título url) - mudar para puxar por id do usuário depois
 		return $query->row_array();
+	}
+
+	public function get_originals_by_user_id(){
+		$id = $_SESSION['logged in']['id'];
+
+
+		$query = $this->db->get_where('originals', array('author_id' => $id));
+
+		return $query->result_array();
 	}
 
 	public function get_originals_by_id($id=0){
@@ -39,7 +49,7 @@ class Originals_model extends CI_Model {
 			return $this->db->insert('originals', $data);
 		} else {
 			$this->db->where('id', $id);
-			return $this->db->updated('originals', $data);
+			return $this->db->update('originals', $data);
 		}
 	}
 

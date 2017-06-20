@@ -4,11 +4,12 @@ class Originals extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('originals_model');
+		$this->load->model('users_model');
 		$this->load->helper('url_helper');
 	}
 
 	public function index(){
-		$data['originals'] = $this->originals_model->get_originals();
+		$data['originals'] = $this->originals_model->get_originals_by_user_id();
 		$data['title'] = 'Arquivo de Textos';
 
 		$this->load->view('structure/header', $data);

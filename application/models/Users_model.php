@@ -34,6 +34,15 @@ class Users_model extends CI_Model {
 		return $query->row_array();
 	}
 
+	public function get_users_by_login($login, $password){
+
+		$this->db->where('login', $login);
+		$this->db->where('password', $password);
+		$user = $this->db->get('users')->row_array();
+		return $user;
+
+	}
+
 	public function set_users($id = 0){
 
 		$this->load->helper('url');
